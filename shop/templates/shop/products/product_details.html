@@ -1,0 +1,47 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+Home | TapLK
+{% endblock title %}
+
+{% block content %}
+<section class="bg-light py-4 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">{{products}} product</h4>
+                <hr style="border-color: #b8bfc2;">
+            </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{%  url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{%  url 'collectionview' products.Category.name %}">Collection</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{products}}</li>
+                </ol>
+            </nav>
+            <div class=" col-4 my-3">
+            <img src="{{ products.product_image.url }}"
+                         class="card-img-top"
+                         alt="{{products}}"
+                         style="height:200px; object-fit:cover;">
+            </div>
+            <div class="col-8 my-3">
+                <h5 class="text-success">{{products | upper}}</h5>
+                <p>{{products.vendor}}</p>                
+                <p>{{products.description}}</p>
+                <h6 class="my-3 text-danger">Current Price : Rs. {{products.original_price | stringformat:'d'}}</h6>           
+                <h5 class="my-3 text-primary">Current Price : Rs. {{products.selling_price | stringformat:'d'}}</h5>           
+                <div class="my-3">
+                    <button class="btn btn-primary">
+                        <i class="fa fa-cart"> Add to Cart</i>
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="fa fa-heart"> Add to Cart</i>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+{% endblock content %}
