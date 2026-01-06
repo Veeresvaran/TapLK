@@ -32,9 +32,15 @@ Home | TapLK
                 <h6 class="my-3 text-danger">Current Price : Rs. {{products.original_price | stringformat:'d'}}</h6>           
                 <h5 class="my-3 text-primary">Current Price : Rs. {{products.selling_price | stringformat:'d'}}</h5>           
                 <div class="my-3">
+                    {%if products.quantity > 0 %}
                     <button class="btn btn-primary">
                         <i class="fa fa-cart"> Add to Cart</i>
                     </button>
+                    {% else %}
+                    <button class="btn btn-secondary">
+                        <i class="fa fa-minus"> out of stock</i>
+                    </button>
+                    {%endif%}
                     <button class="btn btn-danger">
                         <i class="fa fa-heart"> Add to Cart</i>
                     </button>
