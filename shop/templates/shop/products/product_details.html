@@ -19,7 +19,10 @@ Home | TapLK
                     <li class="breadcrumb-item active" aria-current="page">{{products}}</li>
                 </ol>
             </nav>
-            <div class=" col-4 my-3">
+            <div class=" col-4 my-3 pic-box">
+                 {%if products.trending %}
+                <div class="hot">Hot</div>
+                {%endif%}
             <img src="{{ products.product_image.url }}"
                          class="card-img-top"
                          alt="{{products}}"

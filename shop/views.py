@@ -1,14 +1,17 @@
 from django.shortcuts import redirect, render
+from shop.form import CustomUserCreationForm
 from .models import *
 from django.contrib import messages
 
 
 
 def home(request) :
-    return render(request, 'shop/index.html')
+    products = Product.objects.filter(trending=1)
+    return render(request, 'shop/index.html', {'products':products})
 
 def register(request) :
-    return render(request, 'shop/register.html')
+    form = CustomUserCreationForm()
+    return render(request, 'shop/register.html',{'form':form})
 
 
 def collection(request) :
