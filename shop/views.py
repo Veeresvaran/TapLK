@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from shop.form import CustomUserCreationForm
 from .models import *
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
 
 
@@ -9,8 +10,39 @@ def home(request) :
     products = Product.objects.filter(trending=1)
     return render(request, 'shop/index.html', {'products':products})
 
+def logout_page(request) :
+    if request.user.is_authenticated:
+        logout(request)
+        messages.success(request, "Logged out Successfully")
+    return redirect('/')
+
+
+def login_page(request) :
+    if request.user.is_authenticated:
+        return redirect('/')
+    else:
+        if request.method == 'POST':
+            name = request.POST.get('username')
+            pwd = request.POST.get('password')
+            user = authenticate(request, username=name, password=pwd)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Logged in Successfully")
+                return redirect('/')
+            else:
+                messages.error(request, "Invalid User Name or Password")
+                return redirect('/login')
+    return render(request, 'shop/login.html')
+
 def register(request) :
     form = CustomUserCreationForm()
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your Account has been created")
+            return redirect('login')
+    
     return render(request, 'shop/register.html',{'form':form})
 
 

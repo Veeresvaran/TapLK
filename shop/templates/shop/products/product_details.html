@@ -19,6 +19,7 @@ Home | TapLK
                     <li class="breadcrumb-item active" aria-current="page">{{products}}</li>
                 </ol>
             </nav>
+            {% include 'shop/inc/message.html' %}
             <div class=" col-4 my-3 pic-box">
                  {%if products.trending %}
                 <div class="hot">Hot</div>
@@ -36,17 +37,19 @@ Home | TapLK
                 <h5 class="my-3 text-primary">Current Price : Rs. {{products.selling_price | stringformat:'d'}}</h5>           
                 <div class="my-3">
                     {%if products.quantity > 0 %}
-                    <button class="btn btn-primary">
-                        <i class="fa fa-cart"> Add to Cart</i>
-                    </button>
+                    <p>
+                        <div class="input-group" style="width: 150px;">
+                            <button class="input-group-text bg-success text-light" id="btnMinus" type="button"><i class="fa fa-minus"></i></button>
+                                <input type="text" name="qty" id="txtQty" class="form-control text-center" value="1" >
+                            <button class="input-group-text bg-success text-light" id="btnPlus" type="button"><i class="fa fa-cart-plus"></i></button>
+
+                        </div>
+                    </p>
+                        <button class="btn btn-primary"><i class="fa fa-cart"></i>Add to Cart</button>
                     {% else %}
-                    <button class="btn btn-secondary">
-                        <i class="fa fa-minus"> out of stock</i>
-                    </button>
+                        <button class="btn btn-secondary"><i class="fa fa-minus"></i>out of stock</button>
                     {%endif%}
-                    <button class="btn btn-danger">
-                        <i class="fa fa-heart"> Add to Cart</i>
-                    </button>
+                    <button class="btn btn-danger"><i class="fa fa-heart"></i></button>
                 </div>
             </div>
             
